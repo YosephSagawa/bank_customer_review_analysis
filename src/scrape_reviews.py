@@ -10,7 +10,7 @@ apps = [
 ]
 
 # Function to scrape reviews for a given app
-def scrape_app_reviews(package, bank_name, count=600):
+def scrape_app_reviews(package, bank_name, count=3000):
     try:
         result, _ = reviews(
             package,
