@@ -1,0 +1,6 @@
+google-play-scraper
+pandas
+numpy
+spacy
+vaderSentiment
+python-dateutil
