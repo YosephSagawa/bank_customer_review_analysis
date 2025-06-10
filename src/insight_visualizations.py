@@ -73,14 +73,19 @@ print(f"  Dashen Bank: {dashen_sentiment.to_dict()}")
 sns.set_style("whitegrid")
 
 # 1. Sentiment Trend Over Time (Line Plot)
-plt.figure(figsize=(10, 6))
+plt.figure(figsize=(15, 6))  # Increased width to accommodate more labels
 for bank in banks:
     bank_df = df[df['bank'] == bank]
     trend = bank_df.groupby([bank_df['date'].dt.to_period('M'), 'sentiment_label']).size().unstack(fill_value=0)
-    trend.plot(kind='line', ax=plt.gca(), title=f'Sentiment Trend Over Time')
+    # Sort the index in descending order
+    trend = trend.sort_index(ascending=False)
+    for sentiment in trend.columns:
+        plt.plot(trend.index.astype(str), trend[sentiment], label=f'{bank} - {sentiment}', marker='o')
+plt.title('Sentiment Trend Over Time by Bank')
 plt.xlabel('Month')
 plt.ylabel('Number of Reviews')
-plt.legend(title='Sentiment')
+plt.xticks(rotation=90)  # Rotate x-axis labels for better visibility
+plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
 plt.tight_layout()
 plt.savefig('../output/sentiment_trend.png')
 plt.close()
