@@ -82,7 +82,7 @@ for bank in df['bank'].unique():
         bank_themes.append(review_themes if review_themes else ['Other'])
     
     bank_reviews['themes'] = bank_themes
-    themes_by_bank[bank] = bank_reviews[['review', 'keywords', 'themes']]
+    themes_by_bank[bank] = bank_reviews[['bank', 'rating','date','source','review','sentiment_label', 'sentiment_score', 'keywords', 'themes']]
 
     # Print top keywords and themes
     print(f"\nTop Keywords for {bank}:")
